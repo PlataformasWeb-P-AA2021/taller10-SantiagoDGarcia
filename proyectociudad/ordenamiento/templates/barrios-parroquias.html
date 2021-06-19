@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Lista de parroquias</title>
+</head>
+<body>
+      <h1>Listado de parroquias</h1>
+      <a href="{% url 'crear_parroquias' %}">Crear parroquia</a>
+      <a href="{% url 'crear_barrios' %}">Crear barrio</a>
+      <table>
+            <tr>
+                  <th>Nombre</th>
+                  <th>Tipo</th>
+                  <th></th>
+                  <th>Lista de barrios</th>
+            </tr>
+            {% for x in dic %}
+            <tr>
+                  <td>{{x.nombre}}</td>
+                  <td>{{x.tipo}}</td>
+                  <td><a href="{% url 'editar_parroquia' x.id%}">Editar</a></td>
+                  <td>
+                        <table>
+            
+                              {% for n in x.parroquias.all %}
+                              <tr>
+                                    <th>Nombre</th>
+                                    <th>Viviendas</th>
+                                    <th>Parques</th>
+                                    <th>Edificios</th>
+                                    <th></th>
+                                    <th>sad</th>
+                              </tr>
+                              <tr>
+                                    <td>{{n.nombre}}</td>
+                                    <td>{{n.numero_viviendas}}</td>
+                                    <td>{{n.numero_parques}}</td>
+                                    <td>{{n.numero_edificios}}</td>
+                              </tr>
+                              
+                              {% endfor %} 
+                        </table>
+                  </td>
+            </tr>
+            {% endfor %} 
+      </table>
+      <a href="{% url 'index' %}">Volver</a>
+</body>
+</html>
