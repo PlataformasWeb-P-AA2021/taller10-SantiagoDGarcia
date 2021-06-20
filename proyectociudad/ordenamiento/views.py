@@ -45,10 +45,31 @@ def crear_barrios(request):
             print(formulario.errors)
             if formulario.is_valid(): 
                   formulario.save()
-                  return redirect(ir_barrios_parroquias)
-            else:
-                  return redirect(index)                  
+                  return redirect(ir_barrios_parroquias)            
       else:
             return render(request, 'crear-parroquia.html',  {'form': FormBarrios}) 
-
       
+def editar_barrio(request, id ):
+      barrio = BarrioCiudadela.objects.get(pk=id)
+      if request.method=='POST':
+            formulario = FormBarrios(request.POST, instance=barrio)
+            print(formulario.errors)
+            if formulario.is_valid():
+                  formulario.save()
+                  return redirect(ir_barrios_parroquias)
+      else:
+            diccionario = {'form': FormBarrios(instance=barrio)}
+            return render(request, 'editar-parroquia.html', diccionario) 
+      
+def crear_barrio_de_parroquia(request, id):
+      parroquia = Parroquia.objects.get(pk=id)
+      if request.method=='POST':
+            formulario = FormBarrioDeParroquia(parroquia, request.POST)
+            print(formulario.errors)
+            if formulario.is_valid(): 
+                  formulario.save()
+                  return redirect(ir_barrios_parroquias)            
+      else:
+            formulario = FormBarrioDeParroquia(parroquia)
+            diccionario = {'form': formulario, 'parroquia': parroquia}
+            return render(request, 'crear-barrio-de-parroquia.html', diccionario )

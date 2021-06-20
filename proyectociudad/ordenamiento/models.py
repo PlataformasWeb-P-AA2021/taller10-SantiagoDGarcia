@@ -19,7 +19,7 @@ class BarrioCiudadela(models.Model):
     cant_park= (('1', '1'),('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'))
     nombre = models.CharField(max_length=30)
     numero_viviendas = models.IntegerField("Cantidad de viviendas") 
-    numero_parques = models.IntegerField("Cantidad de parques", choices=cant_park) 
+    numero_parques = models.CharField("Cantidad de parques", max_length=1, choices=cant_park) 
     numero_edificios = models.IntegerField("Cantidad de edificios")
     
     id_parroquia = models.ForeignKey("Parroquia", related_name='parroquias',  on_delete=models.CASCADE) 
